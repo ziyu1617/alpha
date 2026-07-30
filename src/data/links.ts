@@ -22,7 +22,7 @@ export type AccentColor =
 export interface LinkItem {
   /** 卡片大标题 */
   name: string;
-  /** 目标网址；站内页面用 "/writing" 这类路径 */
+  /** 目标网址；站内页面用 "/archive" 这类路径 */
   href: string;
   /** 编号后面的小字（网址 / 说明） */
   meta: string;
@@ -72,8 +72,8 @@ export const LINKS: LinkItem[] = [
   },
   {
     name: "Archive",
-    href: "/writing",
-    meta: "/writing",
+    href: "/archive",
+    meta: "/journal",
     accent: "green",
     rot: 1.8,
     icon: "flower",

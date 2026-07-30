@@ -27,7 +27,7 @@ src/
 ├── app/
 │   ├── layout.tsx        # 根布局：字体、元信息、精灵图注入
 │   ├── page.tsx          # 首页（链接索引）
-│   ├── writing/page.tsx  # /writing 写作页
+│   ├── archive/page.tsx  # /archive 归档页
 │   ├── globals.css       # Tailwind + shadcn 主题变量
 │   └── zine.css          # 页面专属视觉（纸面 / 卡片 / 装饰）
 ├── components/
