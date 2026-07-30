@@ -90,7 +90,7 @@ export const LINKS: LinkItem[] = [
   },
   {
     name: "Elsewhere",
-    href: "#",
+    href: "/elsewhere",
     meta: "perception",
     accent: "purple",
     rot: 1,

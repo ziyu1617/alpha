@@ -1,0 +1,197 @@
+/* ══════════════════════════════════════════════════════════════════
+   elsewhere — 纯白留白页：细小等宽字 + 居中一张图 + 散落的链接区块
+   （风格独立于 zine 纸面，参考 everything-index 式的极简排版）
+   ══════════════════════════════════════════════════════════════════ */
+
+body:has(.else) {
+  background: #fff;
+}
+
+.else {
+  min-height: 100dvh;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-space-mono), "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  padding: 18px 22px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 6vh, 72px);
+}
+
+/* ── 顶部：极小的导航行 ── */
+.else__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.else__brand { color: #111; }
+.else__brand a {
+  color: inherit;
+  text-decoration: none;
+}
+.else__brand a:hover,
+.else__brand a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  outline: none;
+}
+.else__ascii {
+  margin: 6px 0 0;
+  font-size: 11px;
+  line-height: 1.35;
+  color: #111;
+  white-space: pre;
+}
+.else__tag { color: #8a8a8a; }
+
+/* ── 中央的图 ── */
+.else__center {
+  margin: 0 auto;
+  max-width: min(620px, 88vw);
+  text-align: center;
+}
+.else__center img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.else__center figcaption {
+  margin-top: 8px;
+  color: #8a8a8a;
+  font-size: 11px;
+}
+
+/* ── 链接分区（松散小块） ── */
+.else__sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 240px));
+  gap: 28px 56px;
+  justify-content: center;
+}
+.else__h {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #8a8a8a;
+}
+.else__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.else__link {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: #111;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.else__link:hover,
+.else__link:focus-visible {
+  color: var(--blue);
+  outline: none;
+}
+.else__count { color: #b3b3b3; font-size: 11px; }
+.else__note { color: #8a8a8a; }
+
+/* ── 页脚 ── */
+.else__foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #b3b3b3;
+  font-size: 11px;
+}
+
+/* ══════════ 照片浮层 ══════════ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(8, 16, 32, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.25s var(--ease) backwards;
+}
+.lightbox__stage {
+  margin: 0;
+  max-width: min(1100px, 90vw);
+  text-align: center;
+}
+.lightbox__img {
+  display: block;
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
+}
+.lightbox__caption {
+  margin-top: 12px;
+  color: #b8c0d0;
+  font-family: var(--font-space-mono), "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.lightbox__nav,
+.lightbox__close {
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #e8e6df;
+  font-family: var(--font-space-mono), monospace;
+  line-height: 1;
+  padding: 14px;
+  transition: color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.lightbox__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 44px;
+}
+.lightbox__nav--prev { left: max(2vw, 8px); }
+.lightbox__nav--next { right: max(2vw, 8px); }
+.lightbox__nav:hover,
+.lightbox__nav:focus-visible {
+  color: var(--yellow);
+  outline: none;
+}
+.lightbox__close {
+  position: fixed;
+  top: 10px;
+  right: max(2vw, 10px);
+  font-size: 30px;
+}
+.lightbox__close:hover,
+.lightbox__close:focus-visible {
+  color: var(--red);
+  transform: rotate(90deg);
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .else__sections {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .lightbox__nav { font-size: 34px; }
+  .lightbox__img { max-height: 72vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox { animation: none; }
+  .lightbox__nav, .lightbox__close { transition: none; }
+}
