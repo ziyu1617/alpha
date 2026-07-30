@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function WritingPage() {
   return (
-    <main className="sheet">
+    <main className="sheet sheet--dark">
       <Decor spec={DECOR.writing} />
 
       <div className="content">
@@ -26,7 +26,7 @@ export default function WritingPage() {
           </p>
           <h1
             className="wordmark wm-underline"
-            style={{ "--accent": "var(--green)" } as CSSProperties}
+            style={{ "--accent": "var(--blue)" } as CSSProperties}
           >
             Archive
           </h1>

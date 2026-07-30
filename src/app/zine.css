@@ -30,6 +30,23 @@
   --font-cjk-stack: var(--font-space-mono), "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
+/* ── dark sheet：深蓝夜纸（仅 Archive 页使用） ── */
+.sheet--dark {
+  --paper: #081020;
+  --paper-2: #0e1830;
+  --ink: #e8e6df;
+  --ink-2: #8e97ab;
+}
+/* 页面外露的 body 背景（如滚动回弹）跟随深色纸面 */
+body:has(.sheet--dark) {
+  background: #081020;
+}
+/* 深底上纸纹用提亮混合，避免 multiply 把底色压死 */
+.sheet--dark::after {
+  mix-blend-mode: soft-light;
+  opacity: 0.3;
+}
+
 /* ── base：印刷纸面铺满整个窗口 ── */
 body {
   margin: 0;
@@ -249,9 +266,9 @@ body {
 
 /* ── writing 页 ── */
 .back { color: var(--ink-2); text-decoration: none; font-weight: 700; letter-spacing: 0.1em; transition: color 0.3s var(--ease); }
-.back:hover, .back:focus-visible { color: var(--green); outline: none; }
+.back:hover, .back:focus-visible { color: var(--blue); outline: none; }
 .back--foot { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.66rem; }
-.wm-underline { border-bottom: 0.09em solid var(--green); line-height: 0.95; padding-bottom: 0.02em; }
+.wm-underline { border-bottom: 0.09em solid var(--accent, var(--green)); line-height: 0.95; padding-bottom: 0.02em; }
 
 .empty { position: relative; text-align: center; padding: clamp(46px, 10vw, 120px) 0 clamp(34px, 7vw, 90px); }
 .empty__bloom {
