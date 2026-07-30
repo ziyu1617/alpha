@@ -65,3 +65,9 @@ src/
 ```bash
 npx shadcn@latest add <component>
 ```
+
+## 部署
+
+推送到 `main` 分支后，GitHub Actions（`.github/workflows/deploy.yml`）会自动
+静态导出（`next.config.ts` 里 `output: "export"` + `basePath: "/alpha"`）并发布到
+GitHub Pages：https://ziyu1617.github.io/alpha/ 。本地开发不带 `/alpha` 前缀。
