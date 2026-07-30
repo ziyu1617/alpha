@@ -7,7 +7,7 @@ import { Sprite } from "@/components/sprite";
 import { DECOR } from "@/data/decor";
 
 export const metadata: Metadata = {
-  title: "Writing — alpha",
+  title: "Archive — alpha",
   description: "alpha · 札记 · 长文 · 碎想",
 };
 
@@ -22,13 +22,13 @@ export default function WritingPage() {
             <Link className="back" href="/">
               ← alpha
             </Link>{" "}
-            <span>·</span> <b>写作</b> <span className="cjk">/ writing</span>
+            <span>·</span> <b>归档</b> <span className="cjk">/ archive</span>
           </p>
           <h1
             className="wordmark wm-underline"
             style={{ "--accent": "var(--green)" } as CSSProperties}
           >
-            Writing
+            Archive
           </h1>
           <span
             className="burst"

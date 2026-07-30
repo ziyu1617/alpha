@@ -71,7 +71,7 @@ export const LINKS: LinkItem[] = [
     spark: "cross",
   },
   {
-    name: "Writing",
+    name: "Archive",
     href: "/writing",
     meta: "/writing",
     accent: "green",
