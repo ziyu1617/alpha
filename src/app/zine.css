@@ -1,0 +1,288 @@
+/* ══════════════════════════════════════════════════════════════════
+   alpha — neon prelude (zine collage)
+   页面的专属视觉：颜色只出现在像素花和虚线上，文字始终是 ink。
+   字体由 next/font 注入（--font-syne / --font-space-mono / --font-caveat）。
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── design tokens ── */
+:root {
+  --paper: #f2f0ea;
+  --paper-2: #ece5d6;
+  --ink: #1f1d1a;
+  --ink-2: #6b665b;
+  --surface: #0c0c0d;
+
+  --red: #e8402a;
+  --crimson: #c01838;
+  --orange: #f07a1e;
+  --yellow: #f2c21c;
+  --lime: #b6d63a;
+  --green: #2faa44;
+  --teal: #1f9ec2;
+  --blue: #2a5fd0;
+  --purple: #6a3cc0;
+  --magenta: #d6328c;
+  --pink: #ea6aa8;
+
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --font-mono-stack: var(--font-space-mono), ui-monospace, monospace;
+  --font-cjk-stack: var(--font-space-mono), "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* ── base：暗色桌面 + 印刷纸面 ── */
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-mono-stack);
+  line-height: 1.5;
+  min-height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+.sheet {
+  --frame: clamp(10px, 1.6vw, 22px);
+  position: relative;
+  width: calc(100% - 2 * var(--frame));
+  max-width: 1500px;
+  margin: var(--frame) auto;
+  min-height: calc(100dvh - 2 * var(--frame));
+  background: var(--paper);
+  padding: clamp(26px, 4vw, 60px) clamp(20px, 4vw, 60px) clamp(20px, 3vw, 44px);
+  box-shadow: 0 26px 70px -22px rgba(0, 0, 0, 0.85), 0 2px 0 rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+/* faint print grain on the paper */
+.sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+.content { position: relative; z-index: 2; }
+
+/* ── motion ── */
+@keyframes pop {
+  0% { opacity: 0; transform: scale(0); }
+  68% { opacity: 1; transform: scale(1.16); }
+  100% { transform: scale(1); }
+}
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+
+.head, .links, .foot { animation: rise 0.7s var(--ease) backwards; }
+.links { animation-delay: 0.12s; }
+.foot { animation-delay: 0.2s; }
+
+/* ── decor：虚线轨迹 + 像素花（永不阻挡点击） ── */
+.deco {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.lines path {
+  fill: none;
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.9;
+  animation: fade-in 1.1s var(--ease) 0.25s backwards;
+}
+
+.burst {
+  position: absolute;
+  display: block;
+  line-height: 0;
+  animation: pop 0.62s var(--ease) backwards;
+  animation-delay: var(--d, 0s);
+}
+/* 单色 sprite 吃 currentColor；多色 sprite 自带 fill 覆盖 */
+.burst svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  fill: currentColor;
+  shape-rendering: crispEdges;
+}
+
+/* ── masthead ── */
+.head { position: relative; margin-bottom: clamp(30px, 5vw, 60px); }
+.kicker {
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  flex-wrap: wrap;
+}
+.kicker b { color: var(--ink); font-weight: 700; }
+.kicker .cjk { letter-spacing: 0.18em; font-family: var(--font-cjk-stack); }
+.wordmark {
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.4rem, 15vw, 10rem);
+  line-height: 0.84;
+  letter-spacing: -0.03em;
+  margin: 0.1em 0 0.12em;
+  color: var(--ink);
+  display: inline-block;
+  position: relative;
+}
+.subtitle {
+  font-family: var(--font-mono-stack);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.2vw, 1.3rem);
+  color: var(--ink);
+}
+.subtitle .cjk { font-style: normal; font-family: var(--font-cjk-stack); }
+.subtitle .dot { color: var(--magenta); padding: 0 0.35em; font-style: normal; }
+.subtitle .sub2 {
+  display: block;
+  color: var(--ink-2);
+  font-style: normal;
+  font-size: 0.82em;
+  letter-spacing: 0.04em;
+  margin-top: 0.25em;
+}
+
+/* ── links：卡片的松散拼贴（1→2→3 列自适应） ── */
+.links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 2vw, 30px);
+  align-items: stretch;
+}
+@media (min-width: 600px) { .links { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 940px) { .links { grid-template-columns: repeat(3, 1fr); } }
+
+.chip {
+  --accent: var(--ink);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  background: var(--paper-2);
+  padding: 20px 24px 18px;
+  transform: rotate(var(--rot, 0deg));
+  box-shadow: 0 3px 14px -6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.chip--wide { grid-column: span 2; }   /* optional: let a card span two columns */
+
+.chip__head {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.chip__icon { width: 30px; height: 30px; line-height: 0; transition: transform 0.45s var(--ease); }
+.chip__icon--lg { width: 36px; height: 36px; }
+.chip__icon svg { width: 100%; height: 100%; fill: currentColor; shape-rendering: crispEdges; color: var(--accent); }
+.chip__go { font-size: 1.05rem; color: var(--ink-2); transition: transform 0.4s var(--ease), color 0.4s var(--ease); }
+.chip__name {
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.45rem, 2.7vw, 2rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 0.16em;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.42s var(--ease);
+  padding-bottom: 0.06em;
+}
+.chip__meta { font-size: 0.72rem; letter-spacing: 0.04em; color: var(--ink-2); margin-top: 0.85em; word-break: break-all; }
+.chip__num { color: var(--ink); font-weight: 700; }
+.chip__spark { position: absolute; top: -12px; right: -10px; width: 26px; line-height: 0; transition: transform 0.5s var(--ease); }
+.chip__spark svg { width: 100%; height: auto; fill: currentColor; shape-rendering: crispEdges; color: var(--accent); }
+
+.chip:hover, .chip:focus-visible {
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+.chip:hover .chip__name, .chip:focus-visible .chip__name { background-size: 100% 0.16em; }
+.chip:hover .chip__go, .chip:focus-visible .chip__go { transform: translate(3px, -3px); color: var(--accent); }
+.chip:hover .chip__icon, .chip:focus-visible .chip__icon { transform: rotate(90deg); }
+.chip:hover .chip__spark, .chip:focus-visible .chip__spark { transform: rotate(40deg) scale(1.18); }
+.chip:focus-visible { box-shadow: 0 0 0 2px var(--accent), 0 16px 30px -12px rgba(0, 0, 0, 0.5); }
+.chip.is-copied .chip__meta { color: var(--accent); }
+
+/* ── colophon ── */
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: 16px;
+  border-top: 1.5px solid var(--ink);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.foot b { color: var(--ink); }
+.sig {
+  font-family: var(--font-caveat), cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  line-height: 1;
+  transform: rotate(-4deg);
+}
+
+/* ── writing 页 ── */
+.back { color: var(--ink-2); text-decoration: none; font-weight: 700; letter-spacing: 0.1em; transition: color 0.3s var(--ease); }
+.back:hover, .back:focus-visible { color: var(--green); outline: none; }
+.back--foot { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.66rem; }
+.wm-underline { border-bottom: 0.09em solid var(--green); line-height: 0.95; padding-bottom: 0.02em; }
+
+.empty { position: relative; text-align: center; padding: clamp(46px, 10vw, 120px) 0 clamp(34px, 7vw, 90px); }
+.empty__bloom {
+  display: block;
+  width: clamp(56px, 9vw, 92px);
+  margin: 0 auto clamp(18px, 3vw, 30px);
+  line-height: 0;
+  animation: pop 0.7s var(--ease) 0.3s backwards;
+}
+.empty__bloom svg { width: 100%; height: auto; shape-rendering: crispEdges; }
+.empty__big {
+  font-family: var(--font-syne), "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.7rem, 5vw, 2.9rem);
+  color: var(--ink);
+  margin: 0 0 0.45em;
+  letter-spacing: -0.01em;
+}
+.empty__sub { font-family: var(--font-mono-stack); font-size: clamp(0.82rem, 2vw, 1rem); color: var(--ink-2); letter-spacing: 0.04em; }
+.empty__sub .cjk { font-family: var(--font-cjk-stack); }
+
+/* ── responsive & reduced motion ── */
+@media (max-width: 760px) {
+  .chip { transform: none; }
+  .chip--wide { grid-column: auto; }
+  .burst.hide-sm { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .burst, .head, .links, .foot, .lines path, .empty__bloom { animation: none; }
+  .chip, .chip__icon, .chip__spark, .chip__go, .chip__name, .back { transition: none; }
+}
