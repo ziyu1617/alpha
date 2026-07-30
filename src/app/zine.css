@@ -30,27 +30,24 @@
   --font-cjk-stack: var(--font-space-mono), "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
-/* ── base：暗色桌面 + 印刷纸面 ── */
+/* ── base：印刷纸面铺满整个窗口 ── */
 body {
   margin: 0;
-  background: var(--surface);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-mono-stack);
   line-height: 1.5;
   min-height: 100vh;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
 }
 
 .sheet {
-  --frame: clamp(10px, 1.6vw, 22px);
   position: relative;
-  width: calc(100% - 2 * var(--frame));
+  width: 100%;
   max-width: 1500px;
-  margin: var(--frame) auto;
-  min-height: calc(100dvh - 2 * var(--frame));
+  margin: 0 auto;
+  min-height: 100dvh;
   background: var(--paper);
   padding: clamp(26px, 4vw, 60px) clamp(20px, 4vw, 60px) clamp(20px, 3vw, 44px);
-  box-shadow: 0 26px 70px -22px rgba(0, 0, 0, 0.85), 0 2px 0 rgba(0, 0, 0, 0.4);
   overflow: hidden;
 }
 /* faint print grain on the paper */
