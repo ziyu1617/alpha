@@ -1,4 +1,5 @@
 import { CornerLinks } from "@/components/corner-links";
+import { CubesBg } from "@/components/cubes-bg";
 import { GalleryLinks } from "@/components/gallery-links";
 import { IndexLinks } from "@/components/index-links";
 import { CENTER_IMAGE, GALLERIES } from "@/data/elsewhere";
@@ -8,6 +9,7 @@ import { asset } from "@/lib/asset";
 export default function HomePage() {
   return (
     <main className="page">
+      <CubesBg />
       <header className="page__top">
         <div className="page__brand">
           <span>alpha</span>
