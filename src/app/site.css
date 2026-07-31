@@ -203,6 +203,30 @@ body:has(.page--dark) {
   outline: none;
 }
 
+/* 右下角的小角标（GitHub / Email） */
+.page__corner {
+  display: inline-flex;
+  gap: 16px;
+  align-items: baseline;
+}
+.page__mark {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--ink-2);
+  text-decoration: none;
+  cursor: pointer;
+}
+.page__mark:hover,
+.page__mark:focus-visible {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  outline: none;
+}
+
 /* ══════════ 照片浮层 ══════════ */
 .lightbox {
   position: fixed;

@@ -1,7 +1,8 @@
+import { CornerLinks } from "@/components/corner-links";
 import { GalleryLinks } from "@/components/gallery-links";
 import { IndexLinks } from "@/components/index-links";
 import { CENTER_IMAGE, GALLERIES } from "@/data/elsewhere";
-import { LINKS } from "@/data/links";
+import { CORNER_LINKS, LINKS } from "@/data/links";
 import { asset } from "@/lib/asset";
 
 export default function HomePage() {
@@ -52,8 +53,8 @@ o_(")(")`}</pre>
       </div>
 
       <footer className="page__foot">
-        <span>alpha · elsewhere · MMXXVI</span>
-        <span>self-published</span>
+        <span>alpha · elsewhere · MMXXVI · self-published</span>
+        <CornerLinks links={CORNER_LINKS} />
       </footer>
     </main>
   );

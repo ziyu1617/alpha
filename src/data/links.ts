@@ -16,7 +16,8 @@ export interface LinkItem {
   label?: string;
 }
 
-export const LINKS: LinkItem[] = [
+/** 右下角的小角标（不进编号列表） */
+export const CORNER_LINKS: LinkItem[] = [
   {
     name: "GitHub",
     href: "https://github.com/ziyu1617",
@@ -29,6 +30,9 @@ export const LINKS: LinkItem[] = [
     meta: "zhangziyu0025@outlook.com",
     label: "复制邮箱 copy email",
   },
+];
+
+export const LINKS: LinkItem[] = [
   {
     name: "Portfolio",
     href: "https://www.figma.com/deck/MxWdGYmXWAMTdWHdWmxHxM/AI%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86%E4%BD%9C%E5%93%81%E9%9B%86_%E5%BC%A0%E5%AD%90%E7%8E%89_v0.1?node-id=5-696&t=UQST8dB9MMErpvNr-1",
