@@ -37,6 +37,18 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* ── dark page（仅 Archive 使用）：沿用旧版深蓝夜纸 #081020 ── */
+.page--dark {
+  background: #081020;
+  --ink: #e8e6df;
+  --ink-2: #8e97ab;
+  --ink-3: #626c82;
+}
+/* 滚动回弹露出的 body 背景跟随深色 */
+body:has(.page--dark) {
+  background: #081020;
+}
+
 /* ── 页面骨架 ── */
 .page {
   min-height: 100dvh;

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ArchivePage() {
   return (
-    <main className="page">
+    <main className="page page--dark">
       <header className="page__top">
         <div className="page__brand">
           <Link href="/">← alpha</Link>
