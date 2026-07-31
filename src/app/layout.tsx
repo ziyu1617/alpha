@@ -1,28 +1,14 @@
 import type { Metadata } from "next";
-import { Caveat, Space_Mono, Syne } from "next/font/google";
-
-import { SpriteDefs } from "@/components/sprite";
+import { Space_Mono } from "next/font/google";
 
 import "./globals.css";
-import "./zine.css";
-
-const syne = Syne({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-syne",
-});
+import "./site.css";
 
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
   style: ["normal", "italic"],
   variable: "--font-space-mono",
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["600"],
-  variable: "--font-caveat",
 });
 
 export const metadata: Metadata = {
@@ -37,12 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh">
-      <body
-        className={`${syne.variable} ${spaceMono.variable} ${caveat.variable}`}
-      >
-        <SpriteDefs />
-        {children}
-      </body>
+      <body className={spaceMono.variable}>{children}</body>
     </html>
   );
 }

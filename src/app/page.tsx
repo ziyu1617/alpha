@@ -1,54 +1,38 @@
-import type { CSSProperties } from "react";
-
-import { Decor } from "@/components/decor";
-import { LinkChip } from "@/components/link-chip";
-import { Sprite } from "@/components/sprite";
-import { DECOR } from "@/data/decor";
+import { IndexLinks } from "@/components/index-links";
 import { LINKS } from "@/data/links";
 
 export default function HomePage() {
   return (
-    <main className="sheet">
-      <Decor spec={DECOR.home} />
+    <main className="page">
+      <header className="page__top">
+        <div className="page__brand">
+          <span>alpha</span>
+          <pre className="page__ascii" aria-hidden="true">{`(\\(\\
+( -.-)
+o_(")(")`}</pre>
+        </div>
+        <p className="page__tag">个人索引 · personal index</p>
+      </header>
 
-      <div className="content">
-        <header className="head">
-          <p className="kicker">
-            <span>{"№ 01"}</span> — <b>个人索引</b>{" "}
-            <span className="cjk">/ personal index</span>
+      <div className="page__sections">
+        <section>
+          <h2 className="page__h">Information 关于</h2>
+          <p className="page__note">
+            粉色弗洛 · pf
+            <br />
+            selected links, works &amp; whereabouts
           </p>
-          <h1 className="wordmark">alpha</h1>
-          <span
-            className="burst"
-            style={
-              { top: "3%", right: "5%", width: 44, "--d": "0.34s" } as CSSProperties
-            }
-            aria-hidden="true"
-          >
-            <Sprite id="bang" rotate={-8} />
-          </span>
-          <p className="subtitle">
-            <span className="cjk">粉色弗洛</span>
-            <span className="dot">·</span>
-            <span className="cjk">pf</span>
-            <span className="sub2">selected links, works &amp; whereabouts</span>
-          </p>
-        </header>
-
-        <nav className="links" aria-label="Links">
-          {LINKS.map((link, index) => (
-            <LinkChip key={link.name} link={link} index={index} />
-          ))}
-        </nav>
-
-        <footer className="foot">
-          <span>
-            <b>self-published</b> · alpha · MMXXVI · set in Syne &amp;{" "}
-            {"Space Mono"}
-          </span>
-          <span className="sig">@alpha</span>
-        </footer>
+        </section>
+        <section>
+          <h2 className="page__h">Links 链接</h2>
+          <IndexLinks links={LINKS} />
+        </section>
       </div>
+
+      <footer className="page__foot">
+        <span>alpha · MMXXVI · self-published</span>
+        <span>@alpha</span>
+      </footer>
     </main>
   );
 }

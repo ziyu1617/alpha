@@ -44,17 +44,17 @@ export function GalleryLinks({ galleries }: { galleries: ElsewhereGallery[] }) {
 
   return (
     <>
-      <ul className="else__list">
+      <ul className="page__list">
         {galleries.map((gallery) => (
           <li key={gallery.id}>
             <button
               type="button"
-              className="else__link"
+              className="page__link"
               onClick={() => setViewer({ gallery, index: 0 })}
             >
               {gallery.title}
             </button>{" "}
-            <span className="else__count">( {gallery.photos.length} )</span>
+            <span className="page__count">( {gallery.photos.length} )</span>
           </li>
         ))}
       </ul>

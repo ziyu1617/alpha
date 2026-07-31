@@ -1,60 +1,34 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { CSSProperties } from "react";
-
-import { Decor } from "@/components/decor";
-import { Sprite } from "@/components/sprite";
-import { DECOR } from "@/data/decor";
 
 export const metadata: Metadata = {
   title: "Archive — alpha",
   description: "alpha · 札记 · 长文 · 碎想",
 };
 
-export default function WritingPage() {
+export default function ArchivePage() {
   return (
-    <main className="sheet sheet--dark">
-      <Decor spec={DECOR.writing} />
+    <main className="page">
+      <header className="page__top">
+        <div className="page__brand">
+          <Link href="/">← alpha</Link>
+        </div>
+        <p className="page__tag">archive · 归档</p>
+      </header>
 
-      <div className="content">
-        <header className="head">
-          <p className="kicker">
-            <Link className="back" href="/">
-              ← alpha
-            </Link>{" "}
-            <span>·</span> <b>归档</b> <span className="cjk">/ archive</span>
-          </p>
-          <h1
-            className="wordmark wm-underline"
-            style={{ "--accent": "var(--blue)" } as CSSProperties}
-          >
-            Archive
-          </h1>
-          <span
-            className="burst"
-            style={{ top: "2%", right: "6%", width: 44, "--d": "0.34s" } as CSSProperties}
-            aria-hidden="true"
-          >
-            <Sprite id="bang" rotate={-8} />
-          </span>
-          <p className="subtitle">
-            <span className="cjk">札记 · 长文 · 碎想</span>
-            <span className="dot">·</span>
-            <span className="cjk">notes, essays &amp; fragments</span>
-          </p>
-        </header>
-
-        {/* ✎ 正文区（留空）：要发文章时在这里加内容，可照搬首页的 LinkChip 卡片，或做成一列「标题 + 日期」 */}
-
-        <footer className="foot">
-          <span>
-            <b>self-published</b> · alpha · MMXXVI
-          </span>
-          <Link className="back back--foot" href="/">
-            ← 返回首页 back to index
-          </Link>
-        </footer>
+      <div className="page__sections">
+        <section>
+          <h2 className="page__h">Archive 归档</h2>
+          <p className="page__note">札记 · 长文 · 碎想 · notes, essays &amp; fragments</p>
+          {/* ✎ 要发文章时，把下面的占位换成「标题 + 日期」列表 */}
+          <p className="page__note--dim">( nothing here yet · 慢慢来 )</p>
+        </section>
       </div>
+
+      <footer className="page__foot">
+        <span>alpha · archive · MMXXVI</span>
+        <Link href="/">← back to index 返回首页</Link>
+      </footer>
     </main>
   );
 }

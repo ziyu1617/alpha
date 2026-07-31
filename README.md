@@ -1,6 +1,6 @@
 # alpha — the prelude of neon
 
-个人索引页 · a personal index of links。杂志拼贴（zine collage）风格：印刷纸面、像素花、虚线轨迹。
+个人索引页 · a personal index of links。极简留白风格：纯白纸面、细小等宽字、下划线链接、深色浮层看图。
 
 在线地址：https://ziyu1617.github.io/alpha/
 
@@ -25,21 +25,22 @@ npm run lint       # ESLint 检查
 ```
 src/
 ├── app/
-│   ├── layout.tsx        # 根布局：字体、元信息、精灵图注入
-│   ├── page.tsx          # 首页（链接索引）
-│   ├── archive/page.tsx  # /archive 归档页
-│   ├── globals.css       # Tailwind + shadcn 主题变量
-│   └── zine.css          # 页面专属视觉（纸面 / 卡片 / 装饰）
+│   ├── layout.tsx          # 根布局：字体（Space Mono）、元信息
+│   ├── page.tsx            # 首页（链接索引）
+│   ├── archive/page.tsx    # /archive 归档页
+│   ├── elsewhere/page.tsx  # /elsewhere 别处页（图 + 相册）
+│   ├── globals.css         # Tailwind + shadcn 主题变量
+│   └── site.css            # 全站设计语言（留白排版 + 照片浮层）
 ├── components/
-│   ├── ui/               # shadcn/ui 组件（button、tooltip…）
-│   ├── link-chip.tsx     # 链接卡片（含点击复制）
-│   ├── decor.tsx         # 装饰层（虚线 + 像素花）
-│   ├── sprite.tsx        # 像素图标组件
-│   └── sprite-symbols.ts # 像素图标 symbol 定义
+│   ├── ui/                 # shadcn/ui 组件（button、tooltip…）
+│   ├── index-links.tsx     # 首页链接列表（含点击复制邮箱）
+│   └── gallery-links.tsx   # 相册链接 + 照片浮层查看器
 ├── data/
-│   ├── links.ts          # ✎ 链接数据（日常唯一需要编辑的文件）
-│   └── decor.ts          # ✎ 装饰层数据
-└── lib/utils.ts          # shadcn 的 cn() 工具
+│   ├── links.ts            # ✎ 首页链接数据
+│   └── elsewhere.ts        # ✎ Elsewhere 页相册数据
+└── lib/
+    ├── asset.ts            # public/ 资源的 basePath 前缀
+    └── utils.ts            # shadcn 的 cn() 工具
 ```
 
 ## 怎么加一个链接
@@ -51,14 +52,22 @@ src/
   name: "Blog",
   href: "https://blog.example.com",
   meta: "blog.example.com",
-  accent: "teal",        // red | orange | green | teal | blue | purple | magenta …
-  rot: -1,               // 卡片倾斜角度
-  icon: "plus",          // 左上角像素图标
-  spark: "sq",           // 右上角小装饰
 },
 ```
 
-外链自动新窗口打开；`href` 以 `/` 开头则走站内路由；加 `copy: "…"` 字段则点击变为复制（如邮箱卡片）。
+外链自动新窗口打开；`href` 以 `/` 开头则走站内路由；加 `copy: "…"` 字段则点击变为复制（如邮箱）。
+
+## 怎么加一组相册（Elsewhere 页）
+
+图片放进 `public/elsewhere/`，再编辑 `src/data/elsewhere.ts` 的 `GALLERIES`：
+
+```ts
+{
+  id: "kyoto",
+  title: "京都的雨",
+  photos: [{ src: "/elsewhere/kyoto-01.jpg", alt: "…" }],
+},
+```
 
 ## 添加 shadcn 组件
 
