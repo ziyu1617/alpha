@@ -85,11 +85,49 @@ body:has(.page--dark) {
 }
 .page__tag { color: var(--ink-2); }
 
+/* 舞台：插画正居中，分区环绕两侧 */
+.page__stage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  align-content: center;
+  gap: clamp(28px, 5vw, 80px);
+}
+.page__col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.page__col--left { justify-self: end; }
+.page__col--right { justify-self: start; }
+.page__list--spaced li + li {
+  margin-top: 12px;
+}
+
 /* 居中的媒体 */
 .page__center {
   margin: 0 auto;
   max-width: min(620px, 88vw);
   text-align: center;
+}
+.page__stage .page__center {
+  margin: 0;
+  max-width: min(560px, 46vw);
+}
+
+@media (max-width: 920px) {
+  .page__stage {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 32px;
+  }
+  .page__stage .page__center {
+    order: -1;
+    max-width: 88vw;
+    margin: 0 auto;
+  }
+  .page__col--left, .page__col--right { justify-self: start; }
 }
 .page__center img {
   display: block;

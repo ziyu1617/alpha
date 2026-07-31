@@ -74,9 +74,16 @@ function CopyLink({ link }: { link: LinkItem }) {
   );
 }
 
-export function IndexLinks({ links }: { links: LinkItem[] }) {
+export function IndexLinks({
+  links,
+  spaced = false,
+}: {
+  links: LinkItem[];
+  /** 行与行之间留出间隙（侧栏排列用） */
+  spaced?: boolean;
+}) {
   return (
-    <ul className="page__list">
+    <ul className={spaced ? "page__list page__list--spaced" : "page__list"}>
       {links.map((link, index) => {
         const num = String(index + 1).padStart(2, "0");
         const internal = link.href.startsWith("/");

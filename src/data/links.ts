@@ -44,9 +44,4 @@ export const LINKS: LinkItem[] = [
     href: "https://y.music.163.com/m/user?id=475072461&dlt=0846&app_version=9.5.35",
     meta: "music.163.com",
   },
-  {
-    name: "Elsewhere",
-    href: "/elsewhere",
-    meta: "perception",
-  },
 ];

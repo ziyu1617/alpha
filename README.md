@@ -26,9 +26,8 @@ npm run lint       # ESLint 检查
 src/
 ├── app/
 │   ├── layout.tsx          # 根布局：字体（Space Mono）、元信息
-│   ├── page.tsx            # 首页（链接索引）
-│   ├── archive/page.tsx    # /archive 归档页
-│   ├── elsewhere/page.tsx  # /elsewhere 别处页（图 + 相册）
+│   ├── page.tsx            # 首页（中央插画 + 侧面链接 + 相册）
+│   ├── archive/page.tsx    # /archive 归档页（深蓝）
 │   ├── globals.css         # Tailwind + shadcn 主题变量
 │   └── site.css            # 全站设计语言（留白排版 + 照片浮层）
 ├── components/
@@ -37,7 +36,7 @@ src/
 │   └── gallery-links.tsx   # 相册链接 + 照片浮层查看器
 ├── data/
 │   ├── links.ts            # ✎ 首页链接数据
-│   └── elsewhere.ts        # ✎ Elsewhere 页相册数据
+│   └── elsewhere.ts        # ✎ 首页中央图 + 相册数据
 └── lib/
     ├── asset.ts            # public/ 资源的 basePath 前缀
     └── utils.ts            # shadcn 的 cn() 工具
@@ -57,7 +56,7 @@ src/
 
 外链自动新窗口打开；`href` 以 `/` 开头则走站内路由；加 `copy: "…"` 字段则点击变为复制（如邮箱）。
 
-## 怎么加一组相册（Elsewhere 页）
+## 怎么加一组相册（首页）
 
 图片放进 `public/elsewhere/`，再编辑 `src/data/elsewhere.ts` 的 `GALLERIES`：
 
